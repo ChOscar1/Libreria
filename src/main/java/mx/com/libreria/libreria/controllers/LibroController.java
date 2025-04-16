@@ -2,7 +2,6 @@ package mx.com.libreria.libreria.controllers;
 
 import mx.com.libreria.libreria.dto.LibroDto;
 import mx.com.libreria.libreria.modelo.Libro;
-import mx.com.libreria.libreria.repository.LibroRepository;
 import mx.com.libreria.libreria.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

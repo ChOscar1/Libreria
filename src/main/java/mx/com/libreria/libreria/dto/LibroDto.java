@@ -11,4 +11,7 @@ public class LibroDto {
     private String autor;
     @NotEmpty(message = "El año no puede estar vacio")
     private String anioPublicacion;
+
+    private Long idEditorial;
+
 }

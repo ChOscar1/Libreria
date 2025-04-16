@@ -1,5 +1,7 @@
 package mx.com.libreria.libreria.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
@@ -9,7 +11,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Libro implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,4 +24,15 @@ public class Libro implements Serializable {
     private String autor;
     @NotEmpty(message = "El año no puede estar vacio")
     private String anioPublicacion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "editorial_id")
+    @JsonBackReference //evitar ciclos infinos
+    private Editorial editorial;
+
+    @Transient
+    @JsonProperty("editorialId")
+    public Long getEditorialId() {
+        return editorial != null ? editorial.getId() : null;
+    }
 }
